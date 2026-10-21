@@ -1,0 +1,132 @@
+{
+  "Majority / Training": {
+    "accuracy": 0.857198210964485,
+    "balanced_accuracy": 0.5,
+    "macro_f1": 0.461554510393009,
+    "natural_precision": 0.0,
+    "natural_recall": 0.0,
+    "natural_f1": 0.0,
+    "human_precision": 0.857198210964485,
+    "human_recall": 1.0,
+    "human_f1": 0.923109020786018,
+    "confusion_matrix": [
+      [
+        0,
+        25798
+      ],
+      [
+        0,
+        154858
+      ]
+    ]
+  },
+  "Majority / Validation": {
+    "accuracy": 0.8290335440514836,
+    "balanced_accuracy": 0.5,
+    "macro_f1": 0.4532631710051065,
+    "natural_precision": 0.0,
+    "natural_recall": 0.0,
+    "natural_f1": 0.0,
+    "human_precision": 0.8290335440514836,
+    "human_recall": 1.0,
+    "human_f1": 0.906526342010213,
+    "confusion_matrix": [
+      [
+        0,
+        3002
+      ],
+      [
+        0,
+        14557
+      ]
+    ]
+  },
+  "Logistic: calendar only / Training": {
+    "accuracy": 0.857198210964485,
+    "balanced_accuracy": 0.5,
+    "macro_f1": 0.461554510393009,
+    "natural_precision": 0.0,
+    "natural_recall": 0.0,
+    "natural_f1": 0.0,
+    "human_precision": 0.857198210964485,
+    "human_recall": 1.0,
+    "human_f1": 0.923109020786018,
+    "confusion_matrix": [
+      [
+        0,
+        25798
+      ],
+      [
+        0,
+        154858
+      ]
+    ],
+    "cross_entropy": 0.37943767170452447
+  },
+  "Logistic: calendar only / Validation": {
+    "accuracy": 0.8290335440514836,
+    "balanced_accuracy": 0.5,
+    "macro_f1": 0.4532631710051065,
+    "natural_precision": 0.0,
+    "natural_recall": 0.0,
+    "natural_f1": 0.0,
+    "human_precision": 0.8290335440514836,
+    "human_recall": 1.0,
+    "human_f1": 0.906526342010213,
+    "confusion_matrix": [
+      [
+        0,
+        3002
+      ],
+      [
+        0,
+        14557
+      ]
+    ],
+    "cross_entropy": 0.419627562461506
+  },
+  "Logistic: calendar + location / Training": {
+    "accuracy": 0.8800704100611106,
+    "balanced_accuracy": 0.6339041338928889,
+    "macro_f1": 0.670606608587551,
+    "natural_precision": 0.6913671730270471,
+    "natural_recall": 0.2893247538568881,
+    "natural_f1": 0.4079357271683883,
+    "human_precision": 0.892064052749323,
+    "human_recall": 0.9784835139288897,
+    "human_f1": 0.9332774900067136,
+    "confusion_matrix": [
+      [
+        7464,
+        18334
+      ],
+      [
+        3332,
+        151526
+      ]
+    ],
+    "cross_entropy": 0.2905041931845339
+  },
+  "Logistic: calendar + location / Validation": {
+    "accuracy": 0.861267725952503,
+    "balanced_accuracy": 0.6372380515986755,
+    "macro_f1": 0.6718200776146612,
+    "natural_precision": 0.7327302631578947,
+    "natural_recall": 0.2968021319120586,
+    "natural_f1": 0.422475106685633,
+    "human_precision": 0.8708315486752738,
+    "human_recall": 0.9776739712852923,
+    "human_f1": 0.9211650485436894,
+    "confusion_matrix": [
+      [
+        891,
+        2111
+      ],
+      [
+        325,
+        14232
+      ]
+    ],
+    "cross_entropy": 0.33187044912456415
+  }
+}

@@ -1,0 +1,12 @@
+{
+  "implementation": "NumPy Newton method with backtracking",
+  "l2_lambda": 0.001,
+  "objective": "mean cross entropy + lambda/2 * squared non-intercept weights",
+  "threshold": 0.5,
+  "class_weighting": "none",
+  "gradient_tolerance": 1e-08,
+  "test_predictions_computed": false,
+  "python": "3.12.14 (main, Aug 25 2026, 14:01:42) [MSC v.1944 64 bit (AMD64)]",
+  "numpy": "2.3.5",
+  "pandas": "3.0.1"
+}
