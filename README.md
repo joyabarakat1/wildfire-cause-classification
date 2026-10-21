@@ -1,59 +1,39 @@
-Can Location and Season Help Identify Wildfire Causes?
+# Can Location and Season Help Identify Wildfire Causes?
 
-This project investigates whether the location and discovery calendar of a recorded California wildfire can help distinguish its reported cause as Human or Natural. It tests whether adding latitude and longitude improves classification compared with using discovery month and weekday alone, and whether that improvement holds in later years.
-The project studies causes of recorded fires. It does not predict whether a new wildfire will occur.
+This project tests whether location improves classification of recorded California wildfire causes (Human or Natural), compared with discovery month and weekday alone. It does not predict whether a wildfire will occur.
 
-Dataset
+## Dataset
 
-The project uses the sixth edition of the US Forest Service’s Fire Program Analysis Fire-Occurrence Database (FPA FOD), compiled by Karen C. Short. It contains over 2.3 million US wildfire records from 1992 to 2020.
+Karen C. Short's FPA FOD, sixth edition (1992-2020), US Forest Service. DOI: https://doi.org/10.2737/RDS-2013-0009.6
 
-Original dataset DOI: https://doi.org/10.2737/RDS-2013-0009.6
+[Download the SQLite archive](https://www.datalumos.org/datalumos/project/249023/version/V2/view) and extract `FPA_FOD_20221014.sqlite`. The raw database is not included. Cleaning retains 213,463 California records with known broad cause.
 
-Download mirror: https://www.datalumos.org/datalumos/project/249023/version/V2/view
+## Models and evaluation
 
-Required file: FPA_FOD_20221014.sqlite, extracted from the SQLite-format archive. Download the raw database separately; it is not included in the repository.
+NumPy logistic regression is implemented from scratch. Calendar-only and calendar-plus-location models are compared with and without balanced training weights, against a majority baseline. A random forest is planned.
 
-The California subset contains 251,881 records. Removing 38,418 records with missing, unspecified, or undetermined broad cause leaves 213,463 records: 183,173 Human and 30,290 Natural. Explicit Human labels are retained even when the specific activity is unspecified. Natural does not mean every record is confirmed lightning.
-The source permits use without additional permission or fees and requests citation.
+Training: 1992-2014. Validation: 2015-2017. Test: 2018-2020, not yet scored. All initial thresholds are 0.5. Validation macro-F1 is 0.453 vs 0.672 without weights, and 0.540 vs 0.695 with balanced weights. These are initial comparisons, not optimally tuned models.
 
-Features and preprocessing
+## Files
 
-The models use discovery month, weekday, latitude, and longitude. Calendar features are one-hot encoded for logistic regression, and coordinates are standardized using training statistics. Discovery year defines the split rather than serving as an input. Names, identifiers, cause descriptions, final fire size, and containment information are excluded from predictors. Loading includes checks for valid dates, missing values, duplicate fire identifiers, and global coordinate ranges.
+- `code/`: loading, figures, baseline models, and dependencies.
+- `results/`: reproduced metrics, weights, optimization histories, and data checks.
+- `figures/`: exploration plots.
 
-Models
+Keep the code files together. `baseline.py` contains the shared loader and a separate optional scikit-learn workflow; it is not the source of reported NumPy results.
 
-Completed models include a majority-class baseline and logistic regression implemented with NumPy, comparing calendar-only features with calendar plus location. A random forest is planned.
+## Setup and running
 
-Training uses 1992–2014, validation uses 2015–2017, and testing is reserved for 2018–2020. Adding location increased validation macro-F1 from 0.453 to 0.672. The test set has not yet been scored.
+Use Python 3.11 or newer. From the repository root:
 
-Repository contents
-
-code/: data-loading, figure-generation, baseline scripts, and dependencies.
-
-results/: baseline metrics, optimization histories, and data checks.
-
-figures/: data-exploration plots and supporting summaries.
-
-Keep the scripts together: the figure and NumPy training scripts reuse load_data from baseline.py. The separate scikit-learn entry point in baseline.py is not the source of the reported NumPy results.
-
-Setup and running
-
-Use Python 3.11 or newer. From the repository root folder, install the dependencies:
-
+```bash
 python -m pip install -r code/requirements.txt
-
-Download and extract the dataset. Replace the example database path below with its actual location:
-
 python code/make_figures.py --database "C:/path/to/FPA_FOD_20221014.sqlite" --output figures
-
 python code/train_numpy_baselines.py --database "C:/path/to/FPA_FOD_20221014.sqlite" --output results
+```
 
-These commands regenerate the exploration figures and numerical baselines. Use different output folder names to preserve supplied results. No GPU is required.
+Replace the example path with your extracted database path. These commands regenerate outputs, so choose other output folders if you want to preserve existing results. No GPU is needed. Scikit-learn and matplotlib are optional dependencies only for running `baseline.py` directly.
 
-Limitations
+## Limitations
 
-Reported causes may contain errors, coordinates may be approximate, and recording practices differ across agencies, locations, and years. Excluding unknown causes can introduce selection bias. Results apply to retained recorded fires and should not be used to assign responsibility for an individual wildfire.
-
-Dataset reference
-
-Short, K. C. (2022). Spatial wildfire occurrence data for the United States, 1992–2020 [FPA_FOD_20221014] (6th edition). Forest Service Research Data Archive. https://doi.org/10.2737/RDS-2013-0009.6
+Reported causes may contain errors, and excluding unknown causes can introduce bias. Geographic patterns may partly reflect agency reporting practices. Class proportions change over time, so validation performance may not transfer to test. Results cannot assign responsibility for an individual fire.
