@@ -17,6 +17,7 @@ The California subset contains 251,881 records. Removing 38,418 records with mis
 The source permits use without additional permission or fees and requests citation.
 
 Features and preprocessing
+
 The models use discovery month, weekday, latitude, and longitude. Calendar features are one-hot encoded for logistic regression, and coordinates are standardized using training statistics. Discovery year defines the split rather than serving as an input. Names, identifiers, cause descriptions, final fire size, and containment information are excluded from predictors. Loading includes checks for valid dates, missing values, duplicate fire identifiers, and global coordinate ranges.
 
 Models
